@@ -15,6 +15,22 @@ function App() {
     if (savedUSer) {
       setUser(savedUSer);
     }
+
+    const onReceiveMessage = (e) => {
+      console.log(e);
+      const { key, newValue } = e;
+      if (key === "user") {
+        setUser(newValue);
+      }
+      if (key === null) {
+        setUser("");
+        setUsername("");
+      }
+    };
+    window.addEventListener("storage", onReceiveMessage);
+    return () => {
+      window.removeEventListener("storage", onReceiveMessage);
+    };
   }, []);
 
   const handleLogout = async () => {
