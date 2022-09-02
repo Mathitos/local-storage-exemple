@@ -4,9 +4,24 @@ function App() {
   const [username, setUsername] = useState("");
   const [user, setUser] = useState("");
 
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    // fetch auth from api
+    setUser(username);
+    localStorage.setItem("user", username);
+  };
 
-  const handleLogout = async () => {};
+  useEffect(() => {
+    const savedUSer = localStorage.getItem("user");
+    if (savedUSer) {
+      setUser(savedUSer);
+    }
+  }, []);
+
+  const handleLogout = async () => {
+    setUsername("");
+    setUser("");
+    localStorage.clear();
+  };
 
   if (user) {
     return (
